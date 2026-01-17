@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Детали</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header-area">
+            <a href="{{ url_for('index') }}" style="color: var(--text-muted); text-decoration: none;">Назад к списку</a>
+            <div class="task-actions">
+                <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn-icon">Изменить</a>
+                <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn-icon" style="color: var(--danger);" onclick="return confirm('Удалить?')">Удалить</a>
+            </div>
+        </div>
+
+        <div class="detail-box">
+            <h1>{{ task.title }}</h1>
+            <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+                <span class="priority-tag p-{{ task.priority }}">Приоритет {{ task.priority }}</span>
+                <span style="background: #1e1b4b; color: #818cf8; padding: 4px 12px; border-radius: 6px; font-size: 0.85rem;">{{ task.hashtag }}</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; background: var(--bg-main); padding: 15px; border-radius: 10px; margin-bottom: 30px;">
+                <div>
+                    <small style="color: var(--text-muted)">СРОК</small><br>
+                    <strong>{{ task.due_date.strftime('%d.%m.%Y') if task.due_date else 'Нет' }}</strong>
+                </div>
+                <div>
+                    <small style="color: var(--text-muted)">ФАЙЛ</small><br>
+                    {% if task.attachment %}
+                        <a href="{{ url_for('static', filename='uploads/' + task.attachment) }}" target="_blank" style="color: var(--accent); text-decoration: none;">Открыть файл</a>
+                    {% else %}
+                        Нет файла
+                    {% endif %}
+                </div>
+            </div>
+
+            <p style="white-space: pre-wrap; font-size: 1.1rem;">{{ task.description or 'Нет описания' }}</p>
+
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 30px 0;">
+
+            {% if task.comment %}
+            <div style="background: #1e1e1e; border-left: 4px solid var(--warning); padding: 15px; border-radius: 6px; margin-bottom: 30px; word-break: break-word;">
+                <small style="color: var(--warning); font-weight: bold; letter-spacing: 1px; font-size: 0.75rem;">КОММЕНТАРИЙ:</small>
+                <p style="margin: 5px 0 0 0; color: #aaa; font-size: 0.95rem;">{{ task.comment }}</p>
+            </div>
+            {% endif %}
+
+            <hr style="border: 0; border-top: 1px solid var(--border); margin: 40px 0;">
+
+            <h3>Подзадачи</h3>
+            {% for sub in task.subtasks %}
+            <div class="task-card" style="padding: 10px 15px; background: #1a1a1a;">
+                <span {% if sub.completed %}style="text-decoration: line-through; color: #555;"{% endif %}>
+                    Подзадача: {{ sub.title }}
+                </span>
+                <div class="task-actions">
+                    <a href="{{ url_for('toggle_complete', task_id=sub.id) }}" class="btn-icon">{% if sub.completed %}Вернуть{% else %}Ок{% endif %}</a>
+                    <a href="{{ url_for('delete_task', task_id=sub.id) }}" class="btn-icon" style="color: var(--danger);">Удалить</a>
+                </div>
+            </div>
+            {% endfor %}
+
+            <form action="{{ url_for('add_subtask', parent_id=task.id) }}" method="post" style="display: flex; gap: 10px; margin-top: 20px;">
+                <input type="text" name="title" placeholder="Добавить новую подзадачу..." required>
+                <button type="submit" class="btn-add">Добавить</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

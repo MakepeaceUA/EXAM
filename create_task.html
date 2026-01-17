@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Создание задачи</title>
+</head>
+<body>
+    <div class="container" style="max-width: 600px;">
+        <header class="header-area">
+            <a href="{{ url_for('index') }}" style="color: var(--text-muted); text-decoration: none;">Назад</a>
+            <h1>Новая задача</h1>
+        </header>
+        
+        <form action="{{ url_for('add_task') }}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Название задачи</label>
+                <input type="text" name="title" required placeholder="Что нужно сделать?">
+            </div>
+            
+            <div class="form-group">
+                <label>Описание</label>
+                <textarea name="description" rows="4" placeholder="Детали задачи..."></textarea>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                    <label>Приоритет</label>
+                    <select name="priority">
+                        <option value="1">Низкий (P1)</option>
+                        <option value="2">Средний (P2)</option>
+                        <option value="3">Высокий (P3)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Дата завершения</label>
+                    <input type="date" name="due_date">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Хештеги</label>
+                <input type="text" name="hashtag" placeholder="работа дизайн проект">
+            </div>
+
+            <div class="form-group">
+                <label>Прикрепить файл</label>
+                <input type="file" name="file">
+            </div>
+
+            <button type="submit" class="btn-submit">Создать проект</button>
+        </form>
+    </div>
+</body>
+</html>

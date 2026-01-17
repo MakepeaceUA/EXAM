@@ -1,0 +1,230 @@
+:root {
+    --bg-main: #0a0a0a;         
+    --bg-card: #161616;        
+    --accent: #3b82f6;         
+    --accent-hover: #2563eb;
+    --text-main: #ffffff;
+    --text-muted: #a0a0a0;
+    --border: #262626;         
+    --danger: #ef4444;
+    --success: #22c55e;
+    --warning: #f59e0b;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.header-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header-area h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: -1px;
+}
+
+.btn-add {
+    background-color: var(--accent);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-add:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.action-bar {
+    background: var(--bg-card);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 30px;
+}
+
+.search-form input {
+    width: 100%;
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    color: white;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-form input:focus {
+    border-color: var(--accent);
+}
+
+.filter-chips {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.filter-btn {
+    padding: 6px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    transition: 0.2s;
+}
+
+.filter-btn:hover {
+    border-color: var(--text-muted);
+}
+
+.filter-btn.active {
+    background: var(--text-main);
+    color: var(--bg-main);
+    border-color: var(--text-main);
+}
+
+.task-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.task-card:hover {
+    border-color: #404040;
+}
+
+.task-content h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+}
+
+.task-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.priority-tag {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.p-1 { color: var(--accent); border: 1px solid var(--accent); }
+.p-2 { color: var(--warning); border: 1px solid var(--warning); }
+.p-3 { color: var(--danger); border: 1px solid var(--danger); }
+
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-icon {
+    background: var(--border);
+    color: white;
+    width: auto; 
+    height: 32px;
+    padding: 0 12px; 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.75rem; 
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: 0.2s;
+}
+
+.btn-icon:hover {
+    background: #333;
+}
+
+.completed {
+    opacity: 0.4;
+}
+
+.completed h3 {
+    text-decoration: line-through;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+input, textarea, select {
+    width: 100%;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.btn-submit {
+    background: var(--success);
+    color: white;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.detail-box {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+.file-link {
+    display: inline-block;
+    background: #262626;
+    color: var(--accent);
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin: 15px 0;
+}

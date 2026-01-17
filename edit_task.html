@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Редактирование</title>
+</head>
+<body>
+    <div class="container" style="max-width: 600px;">
+        <header class="header-area">
+            <a href="{{ url_for('task_detail', task_id=task.id) }}" style="color: var(--text-muted); text-decoration: none;">Отмена</a>
+            <h1>Правка задачи</h1>
+        </header>
+        
+        <form action="{{ url_for('update_task', task_id=task.id) }}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Название</label>
+                <input type="text" name="title" value="{{ task.title }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Описание</label>
+                <textarea name="description" rows="4">{{ task.description or '' }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Личная заметка (комментарий)</label>
+                <textarea name="comment" rows="2" style="border-color: #333;">{{ task.comment or '' }}</textarea>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                    <label>Приоритет</label>
+                    <select name="priority">
+                        <option value="1" {% if task.priority == 1 %}selected{% endif %}>Низкий (P1)</option>
+                        <option value="2" {% if task.priority == 2 %}selected{% endif %}>Средний (P2)</option>
+                        <option value="3" {% if task.priority == 3 %}selected{% endif %}>Высокий (P3)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Крайний срок</label>
+                    <input type="date" name="due_date" value="{{ task.due_date.strftime('%Y-%m-%d') if task.due_date }}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Хештеги</label>
+                <input type="text" name="hashtag" value="{{ task.hashtag or '' }}">
+            </div>
+
+            <div class="form-group" style="border-top: 1px solid var(--border); padding-top: 20px;">
+                <label>Заменить файл</label>
+                <input type="file" name="file">
+                {% if task.attachment %}
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">
+                        Текущий файл: <span style="color: var(--accent);">{{ task.attachment }}</span>
+                    </p>
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn-submit">Сохранить изменения</button>
+        </form>
+    </div>
+</body>
+</html>
